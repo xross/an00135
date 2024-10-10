@@ -1,15 +1,26 @@
 cmake_minimum_required(VERSION 3.21)
 include($ENV{XMOS_CMAKE_PATH}/xcommon.cmake)
-project(app_an00135)
+project(app_test_and_measurement)
 
-set(APP_HW_TARGET          XK-EVK-XU316)
+set(APP_HW_TARGET XK-EVK-XU316)
 
-set(APP_DEPENDENT_MODULES  "")
+set(APP_INCLUDES        src
+                        src/scpi_parser
+                        src/scpi_parser/custom
+                        src/scpi_parser/inc
+                        src/scpi_parser/inc/scpi
+                        )
 
-set(APP_COMPILER_FLAGS     -report)
+# Setup two build configurations, one called "c", the other "xc"
+set(APP_COMPILER_FLAGS_c -g -O3 -report -fxscope)
+set(APP_COMPILER_FLAGS_xc -g -O3 -report -fxscope)
 
-set(APP_INCLUDES           src/)
+# Setup different source files for the two build configurations
+set(SOURCE_FILES_c src/main.c)
+set(SOURCE_FILES_xc src/main.xc src/usbtmc_endpoints.xc)
 
-set(XMOS_SANDBOX_DIR       ${CMAKE_CURRENT_LIST_DIR}/../..)
+set(APP_DEPENDENT_MODULES "lib_xud")
+
+set(XMOS_SANDBOX_DIR ${CMAKE_CURRENT_LIST_DIR}/../..)
 
 XMOS_REGISTER_APP()

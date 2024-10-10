@@ -1,8 +1,8 @@
 :orphan:
 
-##############################
-an00135: USB Test and Measurement Device
-##############################
+#########################################
+AN00135: USB Test and Measurement Device
+#########################################
 
 :vendor: XMOS
 :version: 1.0.0
